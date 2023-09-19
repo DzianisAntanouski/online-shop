@@ -8,27 +8,26 @@ import { Context } from "../index";
 import { getTypes, getBrands, getDevices } from "../http/deviceAPI.js";
 import Pages from "../components/Pages";
 
-
 const Shop = observer(() => {
     const { devices } = useContext(Context);
 
     useEffect(() => {
-        getTypes().then(data => devices.setTypes(data))
-        getBrands().then(data => devices.setBrands(data))
-        getDevices(null, null, 1, 2).then(data => {
-            devices.setDevices(data.rows)
-            devices.setTotalCount(data.count)
-        })
+        getTypes().then((data) => devices.setTypes(data));
+        getBrands().then((data) => devices.setBrands(data));
+        getDevices(null, null, 1, 2).then((data) => {
+            devices.setDevices(data.rows);
+            devices.setTotalCount(data.count);
+        });
         // eslint-disable-next-line
-    }, [])
+    }, []);
 
     useEffect(() => {
-        debugger
-        getDevices(devices.selectedType.id, devices.selectedBrand.id, devices.page, 2).then(data => {
-            devices.setDevices(data.rows)
-            devices.setTotalCount(data.count)
-        })
-    }, [devices.page, devices.selectedType, devices.selectedBrand])
+        debugger;
+        getDevices(devices.selectedType.id, devices.selectedBrand.id, devices.page, 2).then((data) => {
+            devices.setDevices(data.rows);
+            devices.setTotalCount(data.count);
+        });
+    }, [devices.page, devices.selectedType, devices.selectedBrand]);
 
     return (
         <Container>
